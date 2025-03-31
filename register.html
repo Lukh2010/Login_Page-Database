@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> <!-- Programmsprache? -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title> <!-- Titel der Seite -->
+</head>
+<body>
+    <form action="/user-output" method="POST"> <!-- in einer globalen variable speichern -->
+        <h1>Please Register</h1> <!-- Changed to h1 for larger heading -->
+        <br>
+        <label for="username">Benutzername:</label> <!-- Schrift für die variable username -->
+        <input type="text" id="username" name="username" required> <!-- speichern von username -->
+        <br>
+        <label for="password">Passwort:</label>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <input type="submit" value="Submit"> <!-- This submits the form -->
+        <br>
+        <a href="/login"><button type="button">I already have an account</button></a>
+    </form>
+    {% if output %}
+    <p>{{ output }}</p>  <!-- Display the output message here -->
+    {% endif %}
+</body>
+</html>
