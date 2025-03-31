@@ -1,7 +1,29 @@
 # database
+
 testing for a login page
-you need to run "npm install" to install the node files.
-To start the server run "python3 main.py".
-To access go to http://[your ip]:5000/register.
+
+## Installation
+
+You need to run "npm install" to install the node files.
+
+For the python dependencies you can create a virtual environment using:
+
+```sh
+python -m venv venv
+. venv/bin/activate
+```
+
+You can then install the dependencies using:
+
+```sh
+cd database
+pip install -r requirements.txt
+```
+
+
+## Usage
+
+To start the server run `python3 main.py`.
+To access go to `http://127.0.0.1:5000/register`.
 
 (that all in the database folder of course)
