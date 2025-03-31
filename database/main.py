@@ -21,8 +21,6 @@ def load_users():
                 if len(parts) == 2:  # Ensure there are exactly two parts
                     username, password = parts
                     users.append({'username': username, 'password': password})
-                else:
-                    print(f"Malformed line: {line.strip()}")  # Log malformed lines for debugging
     except FileNotFoundError:
         pass  # If the file doesn't exist, return an empty list
     return users
