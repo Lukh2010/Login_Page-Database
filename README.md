@@ -31,4 +31,5 @@ To access go to `http://127.0.0.1:5000/register`.
 ## For Admin Access
 
 Use code: Vp2dykzmTD9/q8BzwItVAPZH1cCdWZnsOPDZDdbMHK8=
+
 When you Register
