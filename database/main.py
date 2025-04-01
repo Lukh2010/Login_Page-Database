@@ -3,7 +3,7 @@ import json
 import os
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key_here'  # Set a unique secret key for the session
+app.secret_key = '06387318de54018d05f792a76c9ef93fb1d712e13f51e19c'  # Session secret key
 
 # File to store user data
 USER_LOG_FILE = 'user_log.txt'
