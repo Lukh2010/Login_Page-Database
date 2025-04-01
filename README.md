@@ -28,6 +28,6 @@ To access go to `http://127.0.0.1:5000/register`.
 
 (that all in the database folder of course)
 
-## For Admin Access
+## For Admin Access (Only Test Version)
 
 Use code this Code when you register: Vp2dykzmTD9/q8BzwItVAPZH1cCdWZnsOPDZDdbMHK8=
