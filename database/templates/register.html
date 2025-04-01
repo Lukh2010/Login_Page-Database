@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8"> <!-- Programmsprache? -->
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title> <!-- Titel der Seite -->
+    <title>Register</title>
 </head>
 <body>
-    <form action="/user-output" method="POST"> <!-- in einer globalen variable speichern -->
-        <h1>Please Register</h1> <!-- Changed to h1 for larger heading -->
-        <br>
-        <label for="username">Benutzername:</label> <!-- Schrift für die variable username -->
-        <input type="text" id="username" name="username" required> <!-- speichern von username -->
-        <br>
-        <label for="password">Passwort:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <input type="submit" value="Submit"> <!-- This submits the form -->
-        <br>
-        <a href="/login"><button type="button">I already have an account</button></a>
+    <h1>Register</h1>
+    <form action="/register" method="POST">  <!-- Updated action to /register -->
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br>
+        
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="address" required><br>
+        
+        <label for="birthdate">Birthdate:</label>
+        <input type="date" id="birthdate" name="birthdate" required><br>
+        
+        <input type="submit" value="Register">
     </form>
+    <a href="/login"><button type="button">Login</button></a> <!-- Added login button -->
     {% if output %}
-    <p>{{ output }}</p>  <!-- Display the output message here -->
+        <p>{{ output }}</p>
     {% endif %}
 </body>
 </html>

@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
 <body>
     <h1>List of Users</h1>
@@ -12,11 +29,19 @@
         <tr>
             <th>Username</th>
             <th>Password</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Birthdate</th>
+            <th>Age</th>
         </tr>
         {% for user in users %}
         <tr>
             <td>{{ user.username }}</td>
             <td>{{ user.password }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.address }}</td>
+            <td>{{ user.birthdate }}</td>
+            <td>{{ user.age }}</td>
         </tr>
         {% endfor %}
     </table>
