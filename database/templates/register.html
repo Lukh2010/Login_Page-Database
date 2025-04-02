@@ -26,7 +26,7 @@
 </head>
 <body>
     <h1>Register</h1>
-    <form action="/register" method="POST">  <!-- Updated action to /register -->
+    <form action="/register" method="POST">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required><br>
         
@@ -44,7 +44,7 @@
         
         <input type="submit" value="Register">
     </form>
-    <a href="/login"><button type="button">Login</button></a> <!-- Added login button -->
+    <a href="/login"><button type="button">Login</button></a>
     {% if output %}
         <p>{{ output }}</p>
     {% endif %}
