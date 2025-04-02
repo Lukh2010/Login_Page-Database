@@ -1,6 +1,4 @@
 from flask import Flask, redirect, render_template, request, session
-import json
-import os
 from datetime import datetime
 
 app = Flask(__name__)
