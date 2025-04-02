@@ -67,6 +67,7 @@ def register():
             if user['username'] == username:
                 return render_template('register.html', output="Username already exists.")
 
+        log_user(username, password, name, address, birthdate)  # Log the new user
         session['logged_in'] = True
         return redirect('/list-users')
 
