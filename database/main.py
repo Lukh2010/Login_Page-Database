@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = '06387318de54018d05f792a76c9ef93fb1d712e13f51e19c'
 
 # File to store user data
-USER_LOG_FILE = 'user_log.txt'
+USER_LOG_FILE = 'database/user_log.txt'
 
 # Function to log user data
 def log_user(username, password, name, address, birthdate, role='normal'):
