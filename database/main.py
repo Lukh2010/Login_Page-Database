@@ -29,7 +29,7 @@ def load_users():
                     username, password, name, address, birthdate, role = parts
                     try:
                         birthdate = datetime.strptime(birthdate, '%Y-%m-%d')
-                        age = (datetime.now() - birthdate).days // 365
+                        age = (datetime.now() - birthdate).days // 365  # Calculate age correctly
                         users.append({'username': username, 'password': password, 'name': name, 'address': address, 'birthdate': birthdate.strftime('%Y-%m-%d'), 'age': age, 'role': role})
                     except ValueError:
                         print(f"Invalid birthdate format: {birthdate}")
@@ -69,6 +69,7 @@ def register():
 
         log_user(username, password, name, address, birthdate)  # Log the new user
         session['logged_in'] = True
+        session.permanent = False  # Ensure the session does not persist
         return redirect('/list-users')
 
     return render_template('register.html')
@@ -87,6 +88,7 @@ def login():
             if user['username'] == username and user['password'] == password:  # check login data
                 session['logged_in'] = True
                 session['role'] = user['role']
+                session.permanent = False  # Ensure the session does not persist
                 return redirect('/list-users')
         
         return render_template('login.html', output="Invalid username or password.")
@@ -109,8 +111,66 @@ def list_users():
     users = load_users()
     return render_template('list_users.html', users=users, show_sensitive=False)
 
-@app.route('/logout')
+@app.route('/change-password', methods=['POST'])
+def change_password():
+    if 'logged_in' not in session:
+        return redirect('/login')
+
+    key = request.form.get('key')
+    if key != 'Vp2dykzmTD9/q8BzwItVAPZH1cCdWZnsOPDZDdbMHK8=':
+        return redirect('/list-users')
+
+    username = request.form['username']
+    new_password = request.form['new_password']
+    users = load_users()
+    user_found = False
+    print(f"Attempting to change password for user: {username}")  # Debug statement
+    for user in users:
+        if user['username'] == username:
+            user['password'] = new_password
+            user_found = True
+            print(f"Password found for user: {username}, changing to: {new_password}")  # Debug statement
+            break
+
+    if user_found:
+        with open(USER_LOG_FILE, 'w') as f:
+            for user in users:
+                f.write(f"{user['username']},{user['password']},{user['name']},{user['address']},{user['birthdate']},{user['role']}\n")
+        print(f"Password changed for user: {username}")
+    else:
+        print(f"User not found: {username}")
+
+    return redirect('/list-users')
+
+@app.route('/delete-user', methods=['POST'])
+def delete_user():
+    if 'logged_in' not in session:
+        return redirect('/login')
+
+    key = request.form.get('key')
+    if key != 'Vp2dykzmTD9/q8BzwItVAPZH1cCdWZnsOPDZDdbMHK8=':
+        return redirect('/list-users')
+
+    username = request.form['username']
+    print(f"Attempting to delete user: {username}")  # Debug statement
+    users = load_users()
+    users_before = len(users)
+    users = [user for user in users if user['username'] != username]
+    print(f"Remaining users after deletion attempt: {[user['username'] for user in users]}")  # Debug statement
+
+    with open(USER_LOG_FILE, 'w') as f:
+        for user in users:
+            f.write(f"{user['username']},{user['password']},{user['name']},{user['address']},{user['birthdate']},{user['role']}\n")
+
+    if len(users) < users_before:
+        print(f"User deleted: {username}")
+    else:
+        print(f"User not found for deletion: {username}")
+
+    return redirect('/list-users')
+
 def logout():
+    print("Logging out user...")  # Debug statement
     session.pop('logged_in', None)
     session.pop('role', None)   # logout button
     return redirect('/login')

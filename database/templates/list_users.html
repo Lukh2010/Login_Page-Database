@@ -24,50 +24,127 @@
         tr:hover {
             background-color: #f1f1f1;
         }
-        input[name="key"] {
-            width: 200px; 
-            height: 10px; 
-            font-size: 20px; 
-            padding: 10px; 
-        }
         a[href="/logout"] {
             font-size: 25px; 
             position: absolute; 
             top: 50px; 
             right: 20px; 
         }
+        .reveal-button {
+            font-size: 15px; /* Adjust the font size to your preference */
+            width: 150px;
+            height: 50px;
+            position: absolute;
+            top: 50px;
+            right: 200px;
+        }
     </style>
 </head>
 <body>
     <h1>List of Users</h1>
-    <form method="POST" style="margin-bottom: 20px;">
-        <input type="text" name="key" placeholder="Enter key for Admin" required>     <!-- input for key -->
-        <button type="submit">Submit</button>
-    </form>
     <a href="/logout" style="float: right; padding: 10px; background-color: red; color: white; text-decoration: none;">Logout</a>    <!-- Logout button -->
-    <table>
-        <tr>
-            <th>Username</th>
-            <th>Name</th>
-            <th>Birthdate</th>
-            <th>Age</th>
-            {% if show_sensitive %}
-                <th>Password</th>
-                <th>Address</th>      <!-- Display the Information table-->
-            {% endif %}
-        </tr>
-        {% for user in users %}
-        <tr>
-            <td>{{ user.username }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.birthdate }}</td>
-            <td>{{ user.age }}</td>
-            {% if show_sensitive %}
-                <td>{{ user.password }}</td>
-                <td>{{ user.address }}</td>
-            {% endif %}
-        </tr>
-        {% endfor %}
-    </table>
+    <button class="reveal-button" onclick="revealSensitiveInfo()" style="float: right; margin-right: 10px;">Reveal Sensitive Information</button> <!-- Reveal button -->
+<table>
+    <tr>
+        <th>Username</th>
+        <th>Name</th>
+        <th>Birthdate</th>
+        <th>Age</th>
+        <th>Password</th>
+        <th>Address</th>
+    </tr>
+    {% for user in users %}
+    <tr>
+        <td>
+            <button class="delete-user" onclick="confirmDeleteUser('{{ user.username }}')">
+                <img src="{{ url_for('static', filename='trashcan_icon.png') }}" alt="Delete User" style="width:20px;height:20px;">
+            </button>
+            {{ user.username }}
+        </td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.birthdate }}</td>
+        <td>{{ user.age }}</td>
+        <td class="sensitive" style="display:none;">
+            {{ user.password }}
+            <button class="change-password" onclick="showChangePasswordPopup('{{ user.username }}')">
+                <img src="{{ url_for('static', filename='pencil_icon.png') }}" alt="Change Password" style="width:20px;height:20px;">
+            </button>
+        </td>
+        <td class="sensitive" style="display:none;">{{ user.address }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+    <script>
+    function revealSensitiveInfo() {
+        const password = prompt("Enter the password to reveal sensitive information:");
+        if (password) {
+            // Check if the password is correct
+            if (password === 'Vp2dykzmTD9/q8BzwItVAPZH1cCdWZnsOPDZDdbMHK8=') {
+                document.querySelectorAll('.sensitive').forEach(function(cell) {
+                    cell.style.display = 'table-cell'; // Ensure cells are displayed
+                });
+            } else {
+                alert("Incorrect password.");
+            }
+        }
+    }
+
+    function showChangePasswordPopup(username) {
+    const password = prompt("Enter the password to change password:");
+    if (password === 'Vp2dykzmTD9/q8BzwItVAPZH1cCdWZnsOPDZDdbMHK8=') {
+        const newPassword = prompt("Enter new password for " + username);
+        if (newPassword) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/change-password';
+            const usernameInput = document.createElement('input');
+            usernameInput.type = 'hidden';
+            usernameInput.name = 'username';
+            usernameInput.value = username;
+            const passwordInput = document.createElement('input');
+            passwordInput.type = 'hidden';
+            passwordInput.name = 'new_password';
+            passwordInput.value = newPassword;
+            const keyInput = document.createElement('input');
+            keyInput.type = 'hidden';
+            keyInput.name = 'key';
+            keyInput.value = password;
+            form.appendChild(usernameInput);
+            form.appendChild(passwordInput);
+            form.appendChild(keyInput);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    } else {
+        alert("Invalid password.");
+    }
+}
+
+function confirmDeleteUser(username) {
+    if (confirm("Are you sure you want to delete " + username + "?")) {
+        const password = prompt("Enter the password to confirm deletion:");
+        if (password === 'Vp2dykzmTD9/q8BzwItVAPZH1cCdWZnsOPDZDdbMHK8=') {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/delete-user';
+            const usernameInput = document.createElement('input');
+            usernameInput.type = 'hidden';
+            usernameInput.name = 'username';
+            usernameInput.value = username;
+            const keyInput = document.createElement('input');
+            keyInput.type = 'hidden';
+            keyInput.name = 'key';
+            keyInput.value = password;
+            form.appendChild(usernameInput);
+            form.appendChild(keyInput);
+            document.body.appendChild(form);
+            form.submit();
+        } else {
+            alert("Invalid password.");
+        }
+    }
+}
+    </script>
 </body>
 </html>
