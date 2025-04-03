@@ -30,6 +30,6 @@ To access go to `http://127.0.0.1:5000/register`.
 
 ## For Admin Access
 
-Use this code on the list_users page to see all the information:
+Use this code when trying to perform sensitiv actions:
 
 Vp2dykzmTD9/q8BzwItVAPZH1cCdWZnsOPDZDdbMHK8=
