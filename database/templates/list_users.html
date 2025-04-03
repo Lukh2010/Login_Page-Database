@@ -18,7 +18,7 @@
             text-align: left;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #f2f2f2;    /* Defines how big the texts are */
         }
         tr:hover {
             background-color: #f1f1f1;
@@ -40,10 +40,10 @@
 <body>
     <h1>List of Users</h1>
     <form method="POST" style="margin-bottom: 20px;">
-        <input type="text" name="key" placeholder="Enter key for Admin" required>
+        <input type="text" name="key" placeholder="Enter key for Admin" required>     <!-- input for key -->
         <button type="submit">Submit</button>
     </form>
-    <a href="/logout" style="float: right; padding: 10px; background-color: red; color: white; text-decoration: none;">Logout</a>
+    <a href="/logout" style="float: right; padding: 10px; background-color: red; color: white; text-decoration: none;">Logout</a>    <!-- Logout button -->
     <table>
         <tr>
             <th>Username</th>
@@ -52,7 +52,7 @@
             <th>Age</th>
             {% if show_sensitive %}
                 <th>Password</th>
-                <th>Address</th>
+                <th>Address</th>      <!-- Display the Information table-->
             {% endif %}
         </tr>
         {% for user in users %}
