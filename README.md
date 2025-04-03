@@ -1,6 +1,6 @@
 # Login page with Database
 
-Testing for a login page
+A ready to use login page (Create a Issue if you have any suggestions)
 
 ## Installation
 
