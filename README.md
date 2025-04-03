@@ -1,6 +1,6 @@
 # Login page with Database
 
-Testing for a login page
+A ready to use login page (Create a Issue if you have any suggestions)
 
 ## Installation
 
@@ -23,10 +23,10 @@ pip install -r requirements.txt
 
 ## Usage
 
-To start the server run `python3 main.py`.
+To start the server run `python3 main.py` (In the database folder).
+
 To access go to `http://127.0.0.1:5000/register`.
 
-(that all in the database folder of course)
 
 ## For Admin Access
 
