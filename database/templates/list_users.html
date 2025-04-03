@@ -38,11 +38,22 @@
             top: 50px;
             right: 200px;
         }
+        .logout-button {
+            font-size: 15px; /* Adjust the font size to your preference */
+            width: 100px;
+            height: 50px;
+            position: absolute;
+            top: 50px;
+            right: 70px;
+        }
     </style>
 </head>
 <body>
     <h1>List of Users</h1>
-    <a href="/logout" style="float: right; padding: 10px; background-color: red; color: white; text-decoration: none;">Logout</a>    <!-- Logout button -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <form method="POST" action="/logout" class="button-form">
+            <button type="submit" class="logout-button">Logout</button>
+    </form>    <!-- Logout button -->
     <button class="reveal-button" onclick="revealSensitiveInfo()" style="float: right; margin-right: 10px;">Reveal Sensitive Information</button> <!-- Reveal button -->
 <table>
     <tr>

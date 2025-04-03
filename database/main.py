@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.secret_key = '06387318de54018d05f792a76c9ef93fb1d712e13f51e19c'
 
 # Where to store user data
-USER_LOG_FILE = 'database/user_log.txt'
+USER_LOG_FILE = 'user_log.txt'
 
 # Function to save user data
 def log_user(username, password, name, address, birthdate, role='normal'):
@@ -169,11 +169,19 @@ def delete_user():
 
     return redirect('/list-users')
 
-def logout():
+@app.route('/logout', methods=['POST'])
+def logout():  
     print("Logging out user...")  # Debug statement
     session.pop('logged_in', None)
     session.pop('role', None)   # logout button
     return redirect('/login')
 
-if __name__ == '__main__':
+if __name__ == '__main__':  
+
+    # Create user_log.txt if it doesn't exist
+    try:  
+        with open(USER_LOG_FILE, 'x') as f:  
+            pass  # Just create the file  
+    except FileExistsError:  
+        pass  
     app.run(host='0.0.0.0', port=5000, debug=True)   # on what port its running
