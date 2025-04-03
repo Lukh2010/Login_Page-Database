@@ -24,6 +24,7 @@ pip install -r requirements.txt
 ## Usage
 
 To start the server run `python3 main.py` (In the database folder).
+
 To access go to `http://127.0.0.1:5000/register`.
 
 
