@@ -1,5 +1,4 @@
-database/node_modules/
-database/user_log.txt
+user_log.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
